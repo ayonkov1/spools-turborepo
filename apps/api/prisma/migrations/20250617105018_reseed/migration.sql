@@ -7,7 +7,7 @@ CREATE TABLE "User" (
     "avatar" TEXT,
     "password" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAta" DATETIME NOT NULL
+    "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateTable
@@ -20,7 +20,7 @@ CREATE TABLE "Post" (
     "published" BOOLEAN NOT NULL,
     "authorId" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAta" DATETIME NOT NULL,
+    "updatedAt" DATETIME NOT NULL,
     CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -31,8 +31,8 @@ CREATE TABLE "Comment" (
     "postId" INTEGER NOT NULL,
     "authorId" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAta" DATETIME NOT NULL,
-    CONSTRAINT "Comment_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "Comment_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "Comment_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE "Like" (
     "userId" INTEGER NOT NULL,
     "postId" INTEGER NOT NULL,
     CONSTRAINT "Like_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Like_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Like_postId_fkey" FOREIGN KEY ("postId") REFERENCES "Post" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -60,10 +60,16 @@ CREATE TABLE "_PostTags" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Post_slug_key" ON "Post"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Tag_name_key" ON "Tag"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Like_userId_postId_key" ON "Like"("userId", "postId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_PostTags_AB_unique" ON "_PostTags"("A", "B");

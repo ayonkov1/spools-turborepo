@@ -19,7 +19,7 @@ async function main() {
   const users = Array.from({ length: 10 }).map(() => ({
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    bio: faker.lorem.sentence(),
+    bio: faker.person.bio(),
     avatar: faker.image.avatar(),
   }));
 
@@ -27,11 +27,11 @@ async function main() {
     data: users,
   });
 
-  const posts = Array.from({ length: 40 }).map(() => ({
-    title: faker.lorem.sentence(),
+  const posts = Array.from({ length: 400 }).map(() => ({
+    title: faker.commerce.productName(),
     slug: generateSlug(faker.lorem.sentence()),
     content: faker.lorem.paragraphs(3),
-    thumbnail: faker.image.urlLoremFlickr(),
+    thumbnail: faker.image.urlPicsumPhotos(),
     authorId: faker.number.int({ min: 1, max: 10 }),
     published: true,
   }));

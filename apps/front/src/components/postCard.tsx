@@ -8,6 +8,7 @@ const PostCard = ({ id, slug, thumbnail, title, content, author, createdAt }: Pr
     return (
         <div className="backdrop-blur-md p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow border border-white/20 flex flex-col mx h-full">
             <Image
+                priority
                 src={thumbnail || '/no-image.png'}
                 alt={title || 'Post thumbnail'}
                 width={600}
