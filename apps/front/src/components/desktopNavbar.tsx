@@ -18,7 +18,7 @@ const DesktopNavbar = (props: Props) => {
     }, [])
 
     const isScrolled = scrollY > 10
-    const navbarClasses = cn('hidden fixed transition-colors w-full z-50 text-white top-0 md:block backdrop-blur-lg bg-white/10 border-b border-white/20', {
+    const navbarClasses = cn('hidden fixed transition-colors w-full z-50 text-gray-800 top-0 md:block backdrop-blur-lg bg-white/10 border-b border-white/20', {
         'bg-white/30 shadow-lg text-gray-800': isScrolled,
     })
 

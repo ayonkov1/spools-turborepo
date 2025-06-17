@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { User } from '../../user/entities/user.entity';
 
 @ObjectType()
 export class Post {
@@ -19,6 +20,9 @@ export class Post {
 
   @Field(() => Boolean)
   published: boolean;
+
+  @Field(() => User)
+  author: User;
 
   @Field()
   createdAt: Date;

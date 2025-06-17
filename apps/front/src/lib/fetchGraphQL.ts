@@ -5,8 +5,6 @@ export const fetchGraphQL = async (query: string, variables = {}) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'authorization':
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJpYXQiOjE3NTAwOTQxMjIsImV4cCI6MTc1MDA5NzcyMn0.yclM91cW6oUXst1KxYSB6chlDpHtYwrWTRmP9tLOrGU',
         },
         body: JSON.stringify({
             query,
@@ -15,6 +13,8 @@ export const fetchGraphQL = async (query: string, variables = {}) => {
     })
 
     if (!response.ok) {
+        console.error(response)
+
         throw new Error(`GraphQL request failed with status ${response.status}`)
     }
 

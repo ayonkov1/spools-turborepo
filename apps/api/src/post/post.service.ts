@@ -19,7 +19,20 @@ export class PostService {
       take,
     });
   }
+
   async count(): Promise<number> {
     return await this.prisma.post.count();
+  }
+
+  async findOne(id: number): Promise<any> {
+    console.log(this.prisma.post);
+
+    return await this.prisma.post.findFirst({
+      where: { id },
+      include: {
+        author: true,
+        tags: true,
+      },
+    });
   }
 }
