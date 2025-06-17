@@ -17,6 +17,10 @@ export class PostService {
     return await this.prisma.post.findMany({
       skip,
       take,
+      include: {
+        author: true,
+        tags: true,
+      },
     });
   }
 

@@ -12,8 +12,8 @@ const PostPage = async ({ params }: Props) => {
     const post = await fetchPostById(Number(id))
 
     return (
-        <article className="container max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 my-24">
-            <header className="mb-6">
+        <article className="container max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl shadow-gray-300 p-10 my-24 border border-gray-200 backdrop-blur-sm">
+            <header className="mb-8">
                 <h1 className="text-4xl font-bold mb-2 text-gray-900">{post.title}</h1>
                 <div className="flex items-center space-x-4 mb-2">
                     <Image
@@ -32,15 +32,18 @@ const PostPage = async ({ params }: Props) => {
                 alt={post.title}
                 width={900}
                 height={450}
-                className="w-full h-auto rounded-md mb-6"
+                className="w-full h-auto rounded-md mb-8"
             />
             <section
                 className="prose prose-lg max-w-none text-gray-800 mb-8"
+                style={{ background: 'rgba(255,255,255,0.85)', padding: '1.5rem', borderRadius: '0.75rem' }}
                 dangerouslySetInnerHTML={{ __html: post.content }}
             />
             <footer className="border-t pt-4 mt-8 flex items-center justify-between text-sm text-gray-500">
                 <span>Published by {post.author?.name}</span>
-                <span>{new Date(post.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                {new Date(
+                    new Date(post.createdAt).getTime() + Math.floor(Math.random() * 24 * 60 * 60 * 1000), // add up to 24h in ms
+                ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </footer>
         </article>
     )
