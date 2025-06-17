@@ -28,7 +28,7 @@ const PostCard = ({ id, slug, thumbnail, title, content, author, createdAt }: Pr
                             href={`/posts/${slug}/${id}`}
                             className="text-blue-500 hover:underline"
                         >
-                            Read more
+                            Read more {id ? `(${id})` : ''}
                         </Link>
                     </div>
                 )}

@@ -1,13 +1,25 @@
 import { Injectable } from '@nestjs/common';
-// import { CreatePostInput } from './dto/create-post.input';
-// import { UpdatePostInput } from './dto/update-post.input';
+import {
+  DEFAULT_PAGINATION_SKIP,
+  DEFAULT_PAGINATION_TAKE,
+} from 'src/constants';
+
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PostService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
-    return await this.prisma.post.findMany();
+  async findAll({
+    skip = DEFAULT_PAGINATION_SKIP,
+    take = DEFAULT_PAGINATION_TAKE,
+  }: { skip?: number; take?: number } = {}): Promise<any[]> {
+    return await this.prisma.post.findMany({
+      skip,
+      take,
+    });
+  }
+  async count(): Promise<number> {
+    return await this.prisma.post.count();
   }
 }
