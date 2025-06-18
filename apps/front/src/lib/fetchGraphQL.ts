@@ -21,7 +21,7 @@ export const fetchGraphQL = async (query: string, variables = {}) => {
     const result = await response.json()
 
     if (result.errors) {
-        throw new Error(`GraphQL errors: ${result.errors.map((error: { message: string }) => error.message).join(', ')}`)
+        return result
     }
 
     return result.data

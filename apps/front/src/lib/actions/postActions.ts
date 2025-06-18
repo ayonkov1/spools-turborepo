@@ -21,7 +21,5 @@ export const fetchPostById = async (id: number) => {
         id,
     })
 
-    console.log(data)
-
     return data.getPostById as Post
 }

@@ -29,8 +29,6 @@ export class PostService {
   }
 
   async findOne(id: number): Promise<any> {
-    console.log(this.prisma.post);
-
     return await this.prisma.post.findFirst({
       where: { id },
       include: {
