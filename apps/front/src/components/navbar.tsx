@@ -12,16 +12,16 @@ const Navbar = () => {
                     Blog
                 </Link>
                 <Link
-                    href="#about"
+                    href="/auth/signin"
                     className=""
                 >
-                    About
+                    Sign In
                 </Link>
                 <Link
-                    href="#contact"
+                    href="/auth/signup"
                     className=""
                 >
-                    Contact
+                    Sign Up
                 </Link>
             </div>
         </>
