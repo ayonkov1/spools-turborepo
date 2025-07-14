@@ -7,6 +7,7 @@ import { signInFormSchema, signUpFormSchema } from '../zodSchemas/signUpFormSche
 import { CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../gqlQueries'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { createSession } from '../session'
 
 export async function signUp(state: SignUpFormState, formData: FormData): Promise<SignUpFormState> {
     const validatedFields = signUpFormSchema.safeParse(Object.fromEntries(formData.entries()))
@@ -59,6 +60,16 @@ export async function signIn(state: SignUpFormState, formData: FormData): Promis
             message: 'Invalid email or password.',
         }
     }
+
+    await createSession({
+        user: {
+            id: data.signIn.id,
+            name: data.signIn.name,
+            avatar: data.signIn.avatar,
+        },
+        accessToken: data.signIn.accessToken,
+    })
+
     revalidatePath('/')
     redirect('/')
 }
